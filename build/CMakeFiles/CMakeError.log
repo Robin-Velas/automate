@@ -1,0 +1,60 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/robin/Documents/S5 - Theorie des langages/automate/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_4188b/fast && /usr/bin/make  -f CMakeFiles/cmTC_4188b.dir/build.make CMakeFiles/cmTC_4188b.dir/build
+make[1] : on entre dans le répertoire « /home/robin/Documents/S5 - Theorie des langages/automate/build/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_4188b.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_4188b.dir/src.c.o -c "/home/robin/Documents/S5 - Theorie des langages/automate/build/CMakeFiles/CMakeTmp/src.c"
+Linking C executable cmTC_4188b
+/snap/cmake/936/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4188b.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_4188b.dir/src.c.o -o cmTC_4188b 
+/usr/bin/ld : CMakeFiles/cmTC_4188b.dir/src.c.o : dans la fonction « main » :
+src.c:(.text+0x46) : référence indéfinie vers « pthread_create »
+/usr/bin/ld : src.c:(.text+0x52) : référence indéfinie vers « pthread_detach »
+/usr/bin/ld : src.c:(.text+0x5e) : référence indéfinie vers « pthread_cancel »
+/usr/bin/ld : src.c:(.text+0x6f) : référence indéfinie vers « pthread_join »
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_4188b.dir/build.make:99 : cmTC_4188b] Erreur 1
+make[1] : on quitte le répertoire « /home/robin/Documents/S5 - Theorie des langages/automate/build/CMakeFiles/CMakeTmp »
+make: *** [Makefile:127 : cmTC_4188b/fast] Erreur 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/robin/Documents/S5 - Theorie des langages/automate/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_2871c/fast && /usr/bin/make  -f CMakeFiles/cmTC_2871c.dir/build.make CMakeFiles/cmTC_2871c.dir/build
+make[1] : on entre dans le répertoire « /home/robin/Documents/S5 - Theorie des langages/automate/build/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_2871c.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_2871c.dir/CheckFunctionExists.c.o -c /snap/cmake/936/share/cmake-3.21/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2871c
+/snap/cmake/936/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2871c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_2871c.dir/CheckFunctionExists.c.o -o cmTC_2871c  -lpthreads 
+/usr/bin/ld : ne peut trouver -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_2871c.dir/build.make:99 : cmTC_2871c] Erreur 1
+make[1] : on quitte le répertoire « /home/robin/Documents/S5 - Theorie des langages/automate/build/CMakeFiles/CMakeTmp »
+make: *** [Makefile:127 : cmTC_2871c/fast] Erreur 2
+
+
+
